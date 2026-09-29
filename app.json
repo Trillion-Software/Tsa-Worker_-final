@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Worker TSA",
+    "slug": "worker-tsa",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "worker-tsa",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.trillionsoftware.workertsa"
+    },
+    "android": {
+      "package": "com.trillionsoftware.workertsa"
+    },
+    "plugins": [
+      "expo-web-browser"
+    ]
+  }
+}

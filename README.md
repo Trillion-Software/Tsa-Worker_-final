@@ -1,10 +1,25 @@
-# Worker TSA — TypeScript + Supabase
+# Worker TSA — Expo React Native + TypeScript + Supabase
 
-Premières pages intégrées à partir des maquettes fournies :
+## Architecture définitive
 
-- `splash.screen.png` → écran de démarrage, 1 seconde.
-- `auth.screen.png` → authentification.
-- Flux Google OAuth → écran de transition avant redirection vers Google.
+- React Native
+- Expo
+- TypeScript
+- Supabase
+- Expo EAS pour les builds Android/iOS
+
+Vite, Astro et React Web ne sont pas utilisés.
+
+## Fichiers à plat
+
+Tous les fichiers de l'application sont à la racine du projet.
+
+Les deux maquettes fournies sont conservées telles quelles à la racine :
+
+- `splash.screen.png`
+- `auth.screen.png`
+
+Le fichier `auth.screen.png` sert de référence visuelle ; l'interface fonctionnelle est codée en composants React Native.
 
 ## Installation
 
@@ -12,37 +27,49 @@ Premières pages intégrées à partir des maquettes fournies :
 npm install
 ```
 
-Copier `.env.example` vers `.env.local`, puis renseigner :
+Copier `.env.example` en `.env` ou configurer les variables Expo :
 
 ```text
-VITE_SUPABASE_URL=...
-VITE_SUPABASE_ANON_KEY=...
+EXPO_PUBLIC_SUPABASE_URL=...
+EXPO_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
-Lancer :
+Puis :
 
 ```bash
-npm run dev
+npx expo start
 ```
 
-Construire :
+## Android
+
+Pour un Android App Bundle :
 
 ```bash
-npm run build
+npx eas build --platform android --profile production
 ```
+
+Le build de production est destiné à produire le fichier utilisable pour Google Play.
+
+## iOS
+
+```bash
+npx eas build --platform ios --profile production
+```
+
+Un compte Apple Developer est nécessaire pour distribuer une application iOS.
 
 ## Supabase
 
-Dans Supabase :
+Activer Email/Password et Google dans Authentication > Providers.
 
-1. Activer Email/Password dans Authentication > Sign In / Providers.
-2. Activer Google dans Authentication > Sign In / Providers.
-3. Ajouter l'URL de l'application dans les URLs de redirection autorisées.
-4. Pour le développement Vite, l'URL locale habituelle est `http://localhost:5173`.
+Pour Google OAuth sur mobile, configurer l'URL de redirection correspondant au schéma :
 
-Le code utilise `signInWithOAuth({ provider: "google" })`.
-La page Google elle-même est fournie par Google/Supabase ; elle n'est pas une maquette que l'application peut contrôler.
+```text
+worker-tsa://auth/callback
+```
 
-## Structure
+La configuration exacte des URLs autorisées doit être faite dans le projet Supabase et dans la configuration OAuth Google.
 
-Tous les fichiers du projet sont volontairement à plat à la racine du repository.
+## Prochaine étape
+
+Les écrans suivants seront ajoutés à partir des prochaines maquettes fournies. Ne pas inventer leurs interfaces avant de recevoir les maquettes.
